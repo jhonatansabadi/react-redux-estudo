@@ -19,7 +19,7 @@ class Main extends Component {
     
     render() {
         return (
-            <div>
+            <div className="content">
                 <Label>{ this.state.resultado }</Label>
             </div>
         );
@@ -27,7 +27,6 @@ class Main extends Component {
 }
 
 export default connect((store) => {
-    console.log(store)
     return {
         resultado: store.main.resultado
     };
