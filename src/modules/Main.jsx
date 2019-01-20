@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getSoma } from '../actions/main';
 import { connect } from 'react-redux';
-import { Navbar } from 'react-bootstrap';
+import { Button, Row, Col, FormControl, ControlLabel } from 'react-bootstrap';
 import NavBar from './../componentes/NavBar';
 
 class Main extends Component {
@@ -23,6 +23,23 @@ class Main extends Component {
         return (
             <div className="content-fluid">
                 <NavBar title="Todo App"></NavBar>
+                <div className="container">
+                    <br />
+                    <Row>
+                        <Col md={6}>
+                            <ControlLabel>Adicione um item</ControlLabel>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <FormControl></FormControl>
+                        </Col>
+                        
+                        <Col>
+                            <Button className="btn btn-success mb-2">ADD</Button>
+                        </Col>
+                    </Row>
+                </div>
             </div>
         );
     }
