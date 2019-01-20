@@ -4,19 +4,40 @@ import { getSoma } from '../actions/main';
 import { connect } from 'react-redux';
 import { Button, Row, Col, FormControl, ControlLabel } from 'react-bootstrap';
 import NavBar from './../componentes/NavBar';
+import Table from 'react-bootstrap-table-next';
 
 class Main extends Component {
     constructor(params) {
         super(params);
         this.state = {
-            resultado: 0
+            item: '',
+            title: [
+                {
+                    dataField: 'title',
+                    text: 'Item'
+                }
+            ],
+            itens: []
         }
-
-        this.props.dispatch(getSoma(1, 7));
+        this.onAdd = this.onAdd.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentWillReceiveProps(props) {
         this.setState(props)
+    }
+
+    onAdd(){
+        const itens = this.state.itens;
+        const item = {
+            title: this.state.item
+        };
+        itens.push(item);
+        this.setState({ itens: itens, item: '' })
+    }
+
+    onChange(e){
+        this.setState({ item: e.target.value });
     }
 
     render() {
@@ -32,12 +53,31 @@ class Main extends Component {
                     </Row>
                     <Row>
                         <Col md={6}>
-                            <FormControl></FormControl>
+                            <FormControl
+                                value={this.state.item}
+                                onChange={this.onChange}
+                                onKeyPress={ (e) => {
+                                    if(e.key == 'Enter'){
+                                        this.onAdd(); 
+                                    }
+                                }} />
                         </Col>
                         
                         <Col>
-                            <Button className="btn btn-success mb-2">ADD</Button>
+                            <Button className="btn btn-success mb-2" onClick={this.onAdd}>
+                                    <i className="fas fa-plus" />
+                            </Button>
                         </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <Table
+                                keyField="id"
+                                columns={ this.state.title }
+                                data={ this.state.itens }
+                            />
+                        </Col>
+
                     </Row>
                 </div>
             </div>
