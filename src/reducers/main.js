@@ -1,11 +1,11 @@
-const initalState = { resultado: 0 };
+const initalState = { item: 0 };
 
 export default function reducer(state = initalState, action) {
   switch (action.type) {
-    case 'soma': {
+    case 'ADD_ITEM': {
       return {
         ...state,
-        resultado: action.payload,
+        item: action.payload,
       };
     }
     default: {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getSoma } from '../actions/main';
+import { getSoma, addItem } from '../actions/main';
 import { connect } from 'react-redux';
 import { Button, Row, Col, FormControl, ControlLabel } from 'react-bootstrap';
 import NavBar from './../componentes/NavBar';
@@ -25,15 +25,14 @@ class Main extends Component {
 
     componentWillReceiveProps(props) {
         this.setState(props)
+        const itens = this.state.itens;
+        const item = { title: this.state.item };
+        itens.push(item);
+        this.setState({ itens: itens, item: '' })
     }
 
     onAdd(){
-        const itens = this.state.itens;
-        const item = {
-            title: this.state.item
-        };
-        itens.push(item);
-        this.setState({ itens: itens, item: '' })
+        this.props.dispatch(addItem(this.state.item));
     }
 
     onChange(e){
@@ -87,6 +86,6 @@ class Main extends Component {
 
 export default connect((store) => {
     return {
-        resultado: store.main.resultado
+        item: store.main.item
     };
 })(Main);

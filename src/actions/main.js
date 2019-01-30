@@ -1,10 +1,9 @@
 // eslint-disable-next-line import/prefer-default-export
-export function getSoma(num1, num2) {
-  const soma = num1 + num2;
+export function addItem(item) {
   return (dispatch) => {
     dispatch({
-      type: 'soma',
-      payload: soma,
+      type: 'ADD_ITEM',
+      payload: item,
     });
   };
 }
