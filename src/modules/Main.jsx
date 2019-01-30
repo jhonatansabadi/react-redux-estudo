@@ -10,11 +10,18 @@ class Main extends Component {
     constructor(params) {
         super(params);
         this.state = {
-            item: '',
+            item: {
+                title: '',
+                info: '',
+             },
             title: [
                 {
                     dataField: 'title',
                     text: 'Item'
+                },
+                {
+                    dataField: 'info',
+                    text: 'Informações'
                 }
             ],
             itens: []
@@ -26,13 +33,17 @@ class Main extends Component {
     componentWillReceiveProps(props) {
         this.setState(props)
         const itens = this.state.itens;
-        const item = { title: this.state.item };
+        const item = { title: this.state.item.title };
         itens.push(item);
         this.setState({ itens: itens, item: '' })
     }
 
     onAdd(){
-        this.props.dispatch(addItem(this.state.item));
+        const item = {
+            item: this.state.item,
+            info: new Date()
+        }
+        this.props.dispatch(addItem(item));
     }
 
     onChange(e){
@@ -53,7 +64,7 @@ class Main extends Component {
                     <Row>
                         <Col md={6}>
                             <FormControl
-                                value={this.state.item}
+                                value={this.state.item.title}
                                 onChange={this.onChange}
                                 onKeyPress={ (e) => {
                                     if(e.key == 'Enter'){

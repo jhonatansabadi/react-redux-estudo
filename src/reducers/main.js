@@ -1,4 +1,4 @@
-const initalState = { item: 0 };
+const initalState = { item: { } };
 
 export default function reducer(state = initalState, action) {
   switch (action.type) {
